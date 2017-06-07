@@ -122,7 +122,7 @@ namespace crypt
             {
                 if (options.EncryptFilename != null && options.DecryptFilename != null)
                 {
-                    Console.WriteLine("Error: Must provide either -E or -D, not both");
+                    Console.WriteLine("Error: Must provide either -E or -D option, not both");
                     Environment.Exit(-1);
                 }
                 if (options.TestFilename != null)
@@ -179,7 +179,9 @@ namespace crypt
 
         private bool IsStrongPassword(string password)
         {
-            return true;
+            return password.Length > 9 &&
+                password.IndexOfAny(@"`~!@#$%^&*()_-+={}[]:"";'<>,.?/|\".ToArray()) != -1 &&
+                password.IndexOfAny("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".ToArray()) != -1;
         }
 
     }
